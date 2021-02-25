@@ -34,6 +34,10 @@ export function traverseModifyRoutes(routes: Routes, access: any): Routes {
         );
       }
       const accessProp = access[currentRoute.access];
+      // if currentRoute.access is not exist, it should return false (which not allow for acccess)
+      if(!accessProp) {
+        currentRouteAccessible = false;
+      }
       // 如果是方法需要执行以下
       if (typeof accessProp === 'function') {
         currentRouteAccessible = accessProp(currentRoute);
